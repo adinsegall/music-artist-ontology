@@ -1,0 +1,5 @@
+__pycache__/
+.DS_Store
+music-artist-relationships-populated.ttl
+music-artist-relationships-enriched.ttl
+music-artist-relationships-advanced.ttl

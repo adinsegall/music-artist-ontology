@@ -1,0 +1,2298 @@
+# ECS7028P Data Semantics Coursework
+# Music Artist Relationships Ontology
+# Student: Adin Segall
+# ID: 240234793
+# Date: May 2025
+
+@prefix : <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@base <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#> .
+
+<https://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#SWRLRules
+:SWRLRules rdf:type owl:AnnotationProperty ;
+           rdfs:comment """
+    Rule: ProlificArtist
+    Artist(?x) ∧ performed(?x, ?r1) ∧ performed(?x, ?r2) ∧ performed(?x, ?r3) ∧ 
+    performed(?x, ?r4) ∧ performed(?x, ?r5) ∧ 
+    differentFrom(?r1, ?r2) ∧ differentFrom(?r1, ?r3) ∧ differentFrom(?r1, ?r4) ∧ 
+    differentFrom(?r1, ?r5) ∧ differentFrom(?r2, ?r3) ∧ differentFrom(?r2, ?r4) ∧ 
+    differentFrom(?r2, ?r5) ∧ differentFrom(?r3, ?r4) ∧ differentFrom(?r3, ?r5) ∧ 
+    differentFrom(?r4, ?r5) → ProlificArtist(?x)
+    
+
+    Rule: VeteranArtist
+    Artist(?x) ∧ activeYearsStart(?x, ?year) ∧ swrlb:lessThan(?year, 1970) → VeteranArtist(?x)
+    
+
+    Rule: AwardWinner
+    Artist(?x) ∧ hasChartPosition(?x, ?award) → AwardWinner(?x)
+    
+
+    Rule: CollaborativeArtist
+    Artist(?x) ∧ collaboratedWith(?x, ?y1) ∧ collaboratedWith(?x, ?y2) ∧ 
+    collaboratedWith(?x, ?y3) ∧ differentFrom(?y1, ?y2) ∧ 
+    differentFrom(?y1, ?y3) ∧ differentFrom(?y2, ?y3) → CollaborativeArtist(?x)
+    
+
+    Rule: MultiGenreArtist
+    Artist(?x) ∧ genre(?x, ?g1) ∧ genre(?x, ?g2) ∧ genre(?x, ?g3) ∧ 
+    differentFrom(?g1, ?g2) ∧ differentFrom(?g1, ?g3) ∧ 
+    differentFrom(?g2, ?g3) → MultiGenreArtist(?x)
+    """ .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#activeYearsStart
+:activeYearsStart rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#birthDate
+:birthDate rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#chartName
+:chartName rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#collaboratedWith
+:collaboratedWith rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#dbpediaUri
+:dbpediaUri rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#genre
+:genre rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#hasChartPosition
+:hasChartPosition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#hasRecordLabel
+:hasRecordLabel rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#name
+:name rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#performed
+:performed rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#performedBy
+:performedBy rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#playsInstrument
+:playsInstrument rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#position
+:position rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#publishedBy
+:publishedBy rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#releaseDate
+:releaseDate rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#gYear
+xsd:gYear rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#collaboratedWith
+:collaboratedWith rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#hasChartPosition
+:hasChartPosition rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#hasRecordLabel
+:hasRecordLabel rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#influencedBy
+:influencedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#performed
+:performed rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#performedBy
+:performedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#publishedBy
+:publishedBy rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#activeYearsStart
+:activeYearsStart rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#birthDate
+:birthDate rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#chartName
+:chartName rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#dbpediaUri
+:dbpediaUri rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#genre
+:genre rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#name
+:name rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#playsInstrument
+:playsInstrument rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#position
+:position rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#releaseDate
+:releaseDate rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/ontology/mo/Label
+mo:Label rdf:type owl:Class .
+
+
+###  http://purl.org/ontology/mo/MusicArtist
+mo:MusicArtist rdf:type owl:Class .
+
+
+###  http://purl.org/ontology/mo/Release
+mo:Release rdf:type owl:Class .
+
+
+###  http://schema.org/MusicAlbum
+schema1:MusicAlbum rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#AwardWinner
+:AwardWinner rdf:type owl:Class ;
+             rdfs:subClassOf mo:MusicArtist ;
+             rdfs:comment "Artists with awards/chart positions" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#ChartPosition
+:ChartPosition rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#CollaborativeArtist
+:CollaborativeArtist rdf:type owl:Class ;
+                     rdfs:subClassOf mo:MusicArtist ;
+                     rdfs:comment "Artists with 3+ collaborations" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#EP
+:EP rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#ProlificArtist
+:ProlificArtist rdf:type owl:Class ;
+                rdfs:subClassOf mo:MusicArtist ;
+                rdfs:comment "Artists with 3+ releases" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Single
+:Single rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#SoloArtist
+:SoloArtist rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#ANTI-
+:ANTI- rdf:type owl:NamedIndividual ,
+                mo:Label ;
+       :name "ANTI-" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Aaron_Neville
+:Aaron_Neville rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Daniel_Lanois ;
+               :dbpediaUri "http://dbpedia.org/resource/Aaron_Neville"^^xsd:anyURI ;
+               :name "Aaron Neville" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Adele
+:Adele rdf:type owl:NamedIndividual ,
+                mo:MusicArtist ,
+                :SoloArtist ;
+       :activeYearsStart "2006"^^xsd:gYear ;
+       :birthDate "1988-05-05"^^xsd:date ;
+       :genre "rock music" ;
+       :name "Adele" ;
+       rdfs:label "Adele"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Alberta_Hunter
+:Alberta_Hunter rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ;
+                :collaboratedWith :Bessie_Smith ;
+                :dbpediaUri "http://dbpedia.org/resource/Alberta_Hunter"^^xsd:anyURI ;
+                :name "Alberta Hunter" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Angel_Records
+:Angel_Records rdf:type owl:NamedIndividual ,
+                        mo:Label ;
+               :name "Angel Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Art_of_Noise
+:Art_of_Noise rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Trevor_Horn ;
+              :dbpediaUri "http://dbpedia.org/resource/Art_of_Noise"^^xsd:anyURI ;
+              :name "Art of Noise" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Arturo_Toscanini
+:Arturo_Toscanini rdf:type owl:NamedIndividual ,
+                           mo:MusicArtist ,
+                           :SoloArtist ;
+                  :genre "classical music" ;
+                  :name "Arturo Toscanini" ;
+                  rdfs:label "Arturo Toscanini"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Astrud_Gilberto
+:Astrud_Gilberto rdf:type owl:NamedIndividual ,
+                          mo:MusicArtist ,
+                          :SoloArtist ;
+                 :collaboratedWith :João_Gilberto ,
+                                   :Stan_Getz ;
+                 :hasRecordLabel :CTI_Records ,
+                                 :Perception_Records ,
+                                 :Verve_Records ;
+                 :activeYearsStart "1963"^^xsd:gYear ;
+                 :birthDate "1940-03-29"^^xsd:date ;
+                 :genre "Bossa nova" ,
+                        "Brazilian jazz" ,
+                        "samba" ;
+                 :name "Astrud Gilberto" ;
+                 rdfs:label "Astrud Gilberto"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Atco_Records
+:Atco_Records rdf:type owl:NamedIndividual ,
+                       mo:Label ;
+              :name "Atco Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Atlantic_Records
+:Atlantic_Records rdf:type owl:NamedIndividual ,
+                           mo:Label ;
+                  :name "Atlantic Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Academy_Award_for_Best_Original_Song_Bob_Dylan
+:Award_Academy_Award_for_Best_Original_Song_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                               :ChartPosition ;
+                                                      :chartName "Academy Award for Best Original Song" ;
+                                                      :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Commandeur_des_Arts_et_des_Lettres_Bob_Dylan
+:Award_Commandeur_des_Arts_et_des_Lettres_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                             :ChartPosition ;
+                                                    :chartName "Commandeur des Arts et des Lettres" ;
+                                                    :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Award_for_Album_of_the_Year_Bob_Dylan
+:Award_Grammy_Award_for_Album_of_the_Year_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                             :ChartPosition ;
+                                                    :chartName "Grammy Award for Album of the Year" ;
+                                                    :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Award_for_Best_Americana_Album_Bob_Dylan
+:Award_Grammy_Award_for_Best_Americana_Album_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                :ChartPosition ;
+                                                       :chartName "Grammy Award for Best Americana Album" ;
+                                                       :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Award_for_Best_Contemporary_Folk_Album_Bob_Dylan
+:Award_Grammy_Award_for_Best_Contemporary_Folk_Album_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                        :ChartPosition ;
+                                                               :chartName "Grammy Award for Best Contemporary Folk Album" ;
+                                                               :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Award_for_Best_Male_Rock_Vocal_Performance_Bob_Dylan
+:Award_Grammy_Award_for_Best_Male_Rock_Vocal_Performance_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                            :ChartPosition ;
+                                                                   :chartName "Grammy Award for Best Male Rock Vocal Performance" ;
+                                                                   :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Award_for_Best_Rock_Performance_by_a_Duo_or_Group_with_Vocal_Bob_Dylan
+:Award_Grammy_Award_for_Best_Rock_Performance_by_a_Duo_or_Group_with_Vocal_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                                              :ChartPosition ;
+                                                                                     :chartName "Grammy Award for Best Rock Performance by a Duo or Group with Vocal" ;
+                                                                                     :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Award_for_Best_Solo_Rock_Vocal_Performance_Bob_Dylan
+:Award_Grammy_Award_for_Best_Solo_Rock_Vocal_Performance_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                            :ChartPosition ;
+                                                                   :chartName "Grammy Award for Best Solo Rock Vocal Performance" ;
+                                                                   :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Award_for_Best_Traditional_Folk_Album_Bob_Dylan
+:Award_Grammy_Award_for_Best_Traditional_Folk_Album_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                       :ChartPosition ;
+                                                              :chartName "Grammy Award for Best Traditional Folk Album" ;
+                                                              :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Grammy_Lifetime_Achievement_Award_Bob_Dylan
+:Award_Grammy_Lifetime_Achievement_Award_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                            :ChartPosition ;
+                                                   :chartName "Grammy Lifetime Achievement Award" ;
+                                                   :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Kennedy_Center_Honors_Bob_Dylan
+:Award_Kennedy_Center_Honors_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                :ChartPosition ;
+                                       :chartName "Kennedy Center Honors" ;
+                                       :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Knight_of_the_Legion_of_Honour_Bob_Dylan
+:Award_Knight_of_the_Legion_of_Honour_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                         :ChartPosition ;
+                                                :chartName "Knight of the Legion of Honour" ;
+                                                :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_National_Medal_of_Arts_Bob_Dylan
+:Award_National_Medal_of_Arts_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                 :ChartPosition ;
+                                        :chartName "National Medal of Arts" ;
+                                        :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Nobel_Prize_in_Literature_Bob_Dylan
+:Award_Nobel_Prize_in_Literature_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                    :ChartPosition ;
+                                           :chartName "Nobel Prize in Literature" ;
+                                           :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Order_of_the_Golden_Spur_Wolfgang_Amadeus_Mozart
+:Award_Order_of_the_Golden_Spur_Wolfgang_Amadeus_Mozart rdf:type owl:NamedIndividual ,
+                                                                 :ChartPosition ;
+                                                        :chartName "Order of the Golden Spur" ;
+                                                        :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Polar_Music_Prize_Bob_Dylan
+:Award_Polar_Music_Prize_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                            :ChartPosition ;
+                                   :chartName "Polar Music Prize" ;
+                                   :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Presidential_Medal_of_Freedom_Bob_Dylan
+:Award_Presidential_Medal_of_Freedom_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                        :ChartPosition ;
+                                               :chartName "Presidential Medal of Freedom" ;
+                                               :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Princess_of_Asturias_Award_for_the_Arts_Bob_Dylan
+:Award_Princess_of_Asturias_Award_for_the_Arts_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                  :ChartPosition ;
+                                                         :chartName "Princess of Asturias Award for the Arts" ;
+                                                         :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Pulitzer_Prize_Special_Citations_and_Awards_Bob_Dylan
+:Award_Pulitzer_Prize_Special_Citations_and_Awards_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                      :ChartPosition ;
+                                                             :chartName "Pulitzer Prize Special Citations and Awards" ;
+                                                             :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Rock_and_Roll_Hall_of_Fame_Bob_Dylan
+:Award_Rock_and_Roll_Hall_of_Fame_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                     :ChartPosition ;
+                                            :chartName "Rock and Roll Hall of Fame" ;
+                                            :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_Terence_Donovan_Award_Bob_Dylan
+:Award_Terence_Donovan_Award_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                :ChartPosition ;
+                                       :chartName "Terence Donovan Award" ;
+                                       :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_honorary_doctor_of_the_University_of_St_Andrews_Bob_Dylan
+:Award_honorary_doctor_of_the_University_of_St_Andrews_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                          :ChartPosition ;
+                                                                 :chartName "honorary doctor of the University of St Andrews" ;
+                                                                 :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Award_honorary_doctorate_from_Princeton_University_Bob_Dylan
+:Award_honorary_doctorate_from_Princeton_University_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                                                       :ChartPosition ;
+                                                              :chartName "honorary doctorate from Princeton University" ;
+                                                              :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Beautiful_Eyes
+:Beautiful_Eyes rdf:type owl:NamedIndividual ,
+                         mo:Release ,
+                         :EP ;
+                :performedBy :Taylor_Swift ;
+                :publishedBy :Big_Machine_Records ;
+                :name "Beautiful Eyes" ;
+                :releaseDate "2008-01-01"^^xsd:date ;
+                rdfs:label "Beautiful Eyes"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Begin_Again
+:Begin_Again rdf:type owl:NamedIndividual ,
+                      mo:Release ,
+                      :Single ;
+             :performedBy :Taylor_Swift ;
+             :publishedBy :Big_Machine_Records ;
+             :name "Begin Again" ;
+             :releaseDate "2012-10-01"^^xsd:date ;
+             rdfs:label "Begin Again"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Believe
+:Believe rdf:type owl:NamedIndividual ,
+                  mo:Release ,
+                  schema1:MusicAlbum ;
+         :performedBy :Justin_Bieber ;
+         :publishedBy :Island_Records ;
+         :name "Believe" ;
+         :releaseDate "2012-06-15"^^xsd:date ;
+         rdfs:label "Believe"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Bessie_Smith
+:Bessie_Smith rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ,
+                       :SoloArtist ;
+              :collaboratedWith :Alberta_Hunter ,
+                                :Ethel_Waters ,
+                                :Ma_Rainey ;
+              :hasRecordLabel :Columbia_Records ,
+                              :Okeh_Records ;
+              :activeYearsStart "1912"^^xsd:gYear ;
+              :birthDate "1894-04-15"^^xsd:date ;
+              :genre "Classic female blues" ,
+                     "Jazz" ,
+                     "blues" ;
+              :name "Bessie Smith" ;
+              rdfs:label "Bessie Smith"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Big_Machine_Records
+:Big_Machine_Records rdf:type owl:NamedIndividual ,
+                              mo:Label ;
+                     :name "Big Machine Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Billie_Holiday
+:Billie_Holiday rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ,
+                         :SoloArtist ;
+                :activeYearsStart "1930"^^xsd:gYear ;
+                :birthDate "1915-04-07"^^xsd:date ;
+                :genre "ballad" ;
+                :name "Billie Holiday" ;
+                rdfs:label "Billie Holiday"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Billy_Preston
+:Billy_Preston rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Little_Richard ;
+               :dbpediaUri "http://dbpedia.org/resource/Billy_Preston"^^xsd:anyURI ;
+               :name "Billy Preston" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Bob_Dylan
+:Bob_Dylan rdf:type owl:NamedIndividual ,
+                    mo:MusicArtist ,
+                    :SoloArtist ;
+           :collaboratedWith :Daniel_Lanois ,
+                             :Neil_Young ;
+           :hasChartPosition :Award_Academy_Award_for_Best_Original_Song_Bob_Dylan ,
+                             :Award_Commandeur_des_Arts_et_des_Lettres_Bob_Dylan ,
+                             :Award_Grammy_Award_for_Album_of_the_Year_Bob_Dylan ,
+                             :Award_Grammy_Award_for_Best_Americana_Album_Bob_Dylan ,
+                             :Award_Grammy_Award_for_Best_Contemporary_Folk_Album_Bob_Dylan ,
+                             :Award_Grammy_Award_for_Best_Male_Rock_Vocal_Performance_Bob_Dylan ,
+                             :Award_Grammy_Award_for_Best_Rock_Performance_by_a_Duo_or_Group_with_Vocal_Bob_Dylan ,
+                             :Award_Grammy_Award_for_Best_Solo_Rock_Vocal_Performance_Bob_Dylan ,
+                             :Award_Grammy_Award_for_Best_Traditional_Folk_Album_Bob_Dylan ,
+                             :Award_Grammy_Lifetime_Achievement_Award_Bob_Dylan ,
+                             :Award_Kennedy_Center_Honors_Bob_Dylan ,
+                             :Award_Knight_of_the_Legion_of_Honour_Bob_Dylan ,
+                             :Award_National_Medal_of_Arts_Bob_Dylan ,
+                             :Award_Nobel_Prize_in_Literature_Bob_Dylan ,
+                             :Award_Polar_Music_Prize_Bob_Dylan ,
+                             :Award_Presidential_Medal_of_Freedom_Bob_Dylan ,
+                             :Award_Princess_of_Asturias_Award_for_the_Arts_Bob_Dylan ,
+                             :Award_Pulitzer_Prize_Special_Citations_and_Awards_Bob_Dylan ,
+                             :Award_Rock_and_Roll_Hall_of_Fame_Bob_Dylan ,
+                             :Award_Terence_Donovan_Award_Bob_Dylan ,
+                             :Award_honorary_doctor_of_the_University_of_St_Andrews_Bob_Dylan ,
+                             :Award_honorary_doctorate_from_Princeton_University_Bob_Dylan ,
+                             :Wikipedia_Presence_Bob_Dylan ;
+           :performed :Dead_Man_Dead_Man ,
+                      :Mozambique ,
+                      :Saved ,
+                      :The_Essential_Bob_Dylan ,
+                      :The_Original_Mono_Recordings ;
+           :activeYearsStart "1961"^^xsd:gYear ;
+           :birthDate "1941-05-24"^^xsd:date ;
+           :genre "Blues" ,
+                  "Country music" ,
+                  "Folk music" ,
+                  "folk rock" ,
+                  "gospel music" ,
+                  "jazz" ;
+           :name "Bob Dylan" ;
+           rdfs:label "Bob Dylan"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Both_of_Us
+:Both_of_Us rdf:type owl:NamedIndividual ,
+                     mo:Release ,
+                     :Single ;
+            :performedBy :Taylor_Swift ;
+            :publishedBy :Grand_Hustle_Records ;
+            :name "Both of Us" ;
+            :releaseDate "2012-05-22"^^xsd:date ;
+            rdfs:label "Both of Us"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Boyfriend
+:Boyfriend rdf:type owl:NamedIndividual ,
+                    mo:Release ,
+                    :Single ;
+           :performedBy :Justin_Bieber ;
+           :publishedBy :RBMG_Records ;
+           :name "Boyfriend" ;
+           :releaseDate "2012-03-01"^^xsd:date ;
+           rdfs:label "Boyfriend"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Brian_Eno
+:Brian_Eno rdf:type owl:NamedIndividual ,
+                    mo:MusicArtist ;
+           :collaboratedWith :Daniel_Lanois ;
+           :dbpediaUri "http://dbpedia.org/resource/Brian_Eno"^^xsd:anyURI ;
+           :name "Brian Eno" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Brunswick_Records
+:Brunswick_Records rdf:type owl:NamedIndividual ,
+                            mo:Label ;
+                   :name "Brunswick Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Bud_Powell
+:Bud_Powell rdf:type owl:NamedIndividual ,
+                     mo:MusicArtist ;
+            :collaboratedWith :Charlie_Parker ;
+            :dbpediaUri "http://dbpedia.org/resource/Bud_Powell"^^xsd:anyURI ;
+            :name "Bud Powell" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#CTI_Records
+:CTI_Records rdf:type owl:NamedIndividual ,
+                      mo:Label ;
+             :name "CTI Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Candid_Records
+:Candid_Records rdf:type owl:NamedIndividual ,
+                         mo:Label ;
+                :name "Candid Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Capitol_Records
+:Capitol_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Capitol Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Charles_Mingus
+:Charles_Mingus rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ,
+                         :SoloArtist ;
+                :collaboratedWith :Charlie_Parker ,
+                                  :Dannie_Richmond ,
+                                  :Don_Pullen ,
+                                  :Duke_Ellington ,
+                                  :Eric_Dolphy ,
+                                  :Jack_Walrath ,
+                                  :Jaki_Byard ,
+                                  :Jimmy_Knepper ,
+                                  :Joni_Mitchell ,
+                                  :Max_Roach ,
+                                  :Miles_Davis ,
+                                  :Pepper_Adams ;
+                :hasRecordLabel :Atlantic_Records ,
+                                :Candid_Records ,
+                                :Columbia_Records ,
+                                :Debut_Records ,
+                                :Mercury_Records ,
+                                :United_Artists_Records ,
+                                <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Impulse!_Records> ;
+                :activeYearsStart "1943"^^xsd:gYear ;
+                :birthDate "1922-04-22"^^xsd:date ;
+                :genre "Avant-garde jazz" ,
+                       "Bebop" ,
+                       "Free jazz" ,
+                       "Hard bop" ,
+                       "Jazz" ,
+                       "Orchestral jazz" ,
+                       "Post-bop" ,
+                       "Third Stream" ,
+                       "post-bop" ;
+                :name "Charles Mingus" ;
+                :playsInstrument "Double bass" ;
+                rdfs:label "Charles Mingus"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Charlie_Parker
+:Charlie_Parker rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ,
+                         :SoloArtist ;
+                :collaboratedWith :Bud_Powell ,
+                                  :Charles_Mingus ,
+                                  :Chet_Baker ,
+                                  :Dizzy_Gillespie ,
+                                  :Don_Byas ,
+                                  :Fats_Navarro ,
+                                  :Lucky_Thompson ,
+                                  :Max_Roach ,
+                                  :Miles_Davis ,
+                                  :Red_Rodney ,
+                                  :Roy_Haynes ,
+                                  :Sonny_Stitt ,
+                                  :Thelonious_Monk ;
+                :hasRecordLabel :Columbia_Graphophone_Company ,
+                                :Mercury_Records ,
+                                :Savoy_Records ,
+                                :Verve_Records ,
+                                :Vogue_Records ,
+                                <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Dial_Records_(1946)> ,
+                                <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Esquire_Records_(UK)> ;
+                :activeYearsStart "1937"^^xsd:gYear ;
+                :birthDate "1920-08-29"^^xsd:date ;
+                :genre "Bebop" ,
+                       "Jazz" ,
+                       "jazz" ;
+                :name "Charlie Parker" ;
+                :playsInstrument "Alto saxophone" ,
+                                 "Tenor saxophone" ;
+                rdfs:label "Charlie Parker"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Cherrytree_Records
+:Cherrytree_Records rdf:type owl:NamedIndividual ,
+                             mo:Label ;
+                    :name "Cherrytree Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Chet_Baker
+:Chet_Baker rdf:type owl:NamedIndividual ,
+                     mo:MusicArtist ;
+            :collaboratedWith :Charlie_Parker ;
+            :dbpediaUri "http://dbpedia.org/resource/Chet_Baker"^^xsd:anyURI ;
+            :name "Chet Baker" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Columbia_Graphophone_Company
+:Columbia_Graphophone_Company rdf:type owl:NamedIndividual ,
+                                       mo:Label ;
+                              :name "Columbia Graphophone Company" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Columbia_Records
+:Columbia_Records rdf:type owl:NamedIndividual ,
+                           mo:Label ;
+                  :name "Columbia Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Crazier
+:Crazier rdf:type owl:NamedIndividual ,
+                  mo:Release ,
+                  :Single ;
+         :performedBy :Taylor_Swift ;
+         :publishedBy :Walt_Disney_Records ;
+         :name "Crazier" ;
+         :releaseDate "2009-03-23"^^xsd:date ;
+         rdfs:label "Crazier"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Daniel_Lanois
+:Daniel_Lanois rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ,
+                        :SoloArtist ;
+               :collaboratedWith :Aaron_Neville ,
+                                 :Bob_Dylan ,
+                                 :Brian_Eno ,
+                                 :Daryl_Johnson ,
+                                 :Malcolm_Burn ,
+                                 :Neil_Young ,
+                                 :Peter_Gabriel ,
+                                 :Rocco_DeLuca ,
+                                 :Scott_Weiland ,
+                                 :The_Parachute_Club ,
+                                 :Trixie_Whitley ,
+                                 :U2 ,
+                                 :Venetian_Snares ,
+                                 <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Black_Dub_(album)> ,
+                                 <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Raffi_(musician)> ,
+                                 <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Spoons_(band)> ;
+               :hasRecordLabel :ANTI- ,
+                               :MapleMusic_Recordings ,
+                               :Warner_Bros._Records ;
+               :activeYearsStart "1968"^^xsd:gYear ;
+               :birthDate "1951-09-19"^^xsd:date ;
+               :genre "Alternative rock" ,
+                      "Ambient music" ,
+                      "Rock music" ,
+                      "rock music" ;
+               :name "Daniel Lanois" ;
+               :playsInstrument "Pedal steel" ;
+               rdfs:label "Daniel Lanois"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Dannie_Richmond
+:Dannie_Richmond rdf:type owl:NamedIndividual ,
+                          mo:MusicArtist ;
+                 :collaboratedWith :Charles_Mingus ;
+                 :dbpediaUri "http://dbpedia.org/resource/Dannie_Richmond"^^xsd:anyURI ;
+                 :name "Dannie Richmond" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Daryl_Johnson
+:Daryl_Johnson rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Daniel_Lanois ;
+               :dbpediaUri "http://dbpedia.org/resource/Daryl_Johnson"^^xsd:anyURI ;
+               :name "Daryl Johnson" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#David_Bowie
+:David_Bowie rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ,
+                      :SoloArtist ;
+             :activeYearsStart "1962"^^xsd:gYear ;
+             :birthDate "1947-01-08"^^xsd:date ;
+             :genre "rock music" ;
+             :name "David Bowie" ;
+             rdfs:label "David Bowie"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Dead_Man_Dead_Man
+:Dead_Man_Dead_Man rdf:type owl:NamedIndividual ,
+                            mo:Release ,
+                            :Single ;
+                   :performedBy :Bob_Dylan ;
+                   :name "Dead Man, Dead Man" ;
+                   rdfs:label "Dead Man, Dead Man"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Debut_Records
+:Debut_Records rdf:type owl:NamedIndividual ,
+                        mo:Label ;
+               :name "Debut Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Dee_Gee_Records
+:Dee_Gee_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Dee Gee Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Discovery_Records
+:Discovery_Records rdf:type owl:NamedIndividual ,
+                            mo:Label ;
+                   :name "Discovery Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Disney_Records
+:Disney_Records rdf:type owl:NamedIndividual ,
+                         mo:Label ;
+                :name "Disney Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Dizzy_Gillespie
+:Dizzy_Gillespie rdf:type owl:NamedIndividual ,
+                          mo:MusicArtist ,
+                          :SoloArtist ;
+                 :collaboratedWith :Charlie_Parker ;
+                 :hasRecordLabel :Dee_Gee_Records ,
+                                 :Discovery_Records ,
+                                 :Pablo_Records ,
+                                 :RCA_Victor_Records ,
+                                 :Savoy_Records ,
+                                 :Verve_Records ;
+                 :activeYearsStart "1935"^^xsd:gYear ;
+                 :birthDate "1917-10-21"^^xsd:date ;
+                 :genre "Afro-Cuban jazz" ,
+                        "Bebop" ,
+                        "Jazz" ,
+                        "jazz" ;
+                 :name "Dizzy Gillespie" ;
+                 :playsInstrument "Trumpet" ;
+                 rdfs:label "Dizzy Gillespie"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Don_Byas
+:Don_Byas rdf:type owl:NamedIndividual ,
+                   mo:MusicArtist ;
+          :collaboratedWith :Charlie_Parker ;
+          :dbpediaUri "http://dbpedia.org/resource/Don_Byas"^^xsd:anyURI ;
+          :name "Don Byas" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Don_Covay
+:Don_Covay rdf:type owl:NamedIndividual ,
+                    mo:MusicArtist ;
+           :collaboratedWith :Little_Richard ;
+           :dbpediaUri "http://dbpedia.org/resource/Don_Covay"^^xsd:anyURI ;
+           :name "Don Covay" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Don_Pullen
+:Don_Pullen rdf:type owl:NamedIndividual ,
+                     mo:MusicArtist ;
+            :collaboratedWith :Charles_Mingus ;
+            :dbpediaUri "http://dbpedia.org/resource/Don_Pullen"^^xsd:anyURI ;
+            :name "Don Pullen" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Donny_Hathaway
+:Donny_Hathaway rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ;
+                :collaboratedWith :Roberta_Flack ;
+                :dbpediaUri "http://dbpedia.org/resource/Donny_Hathaway"^^xsd:anyURI ;
+                :name "Donny Hathaway" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Duke_Ellington
+:Duke_Ellington rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ,
+                         :SoloArtist ;
+                :collaboratedWith :Charles_Mingus ;
+                :activeYearsStart "1914"^^xsd:gYear ;
+                :birthDate "1899-04-29"^^xsd:date ;
+                :genre "Jazz" ,
+                       "Swing music" ,
+                       "gospel music" ;
+                :name "Duke Ellington" ;
+                rdfs:label "Duke Ellington"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#EMI
+:EMI rdf:type owl:NamedIndividual ,
+              mo:Label ;
+     :name "EMI" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#EMI_Classics
+:EMI_Classics rdf:type owl:NamedIndividual ,
+                       mo:Label ;
+              :name "EMI Classics" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#End_Records
+:End_Records rdf:type owl:NamedIndividual ,
+                      mo:Label ;
+             :name "End Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Eric_Dolphy
+:Eric_Dolphy rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ;
+             :collaboratedWith :Charles_Mingus ;
+             :dbpediaUri "http://dbpedia.org/resource/Eric_Dolphy"^^xsd:anyURI ;
+             :name "Eric Dolphy" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Ethel_Waters
+:Ethel_Waters rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Bessie_Smith ;
+              :dbpediaUri "http://dbpedia.org/resource/Ethel_Waters"^^xsd:anyURI ;
+              :name "Ethel Waters" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Ever_Present_Past
+:Ever_Present_Past rdf:type owl:NamedIndividual ,
+                            mo:Release ,
+                            :Single ;
+                   :performedBy :Paul_McCartney ;
+                   :publishedBy :Hear_Music ;
+                   :name "Ever Present Past" ;
+                   :releaseDate "2007-11-05"^^xsd:date ;
+                   rdfs:label "Ever Present Past"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Eyes_Open
+:Eyes_Open rdf:type owl:NamedIndividual ,
+                    mo:Release ,
+                    :Single ;
+           :performedBy :Taylor_Swift ;
+           :publishedBy :Big_Machine_Records ;
+           :name "Eyes Open" ;
+           :releaseDate "2012-03-27"^^xsd:date ;
+           rdfs:label "Eyes Open"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Fats_Navarro
+:Fats_Navarro rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Charlie_Parker ;
+              :dbpediaUri "http://dbpedia.org/resource/Fats_Navarro"^^xsd:anyURI ;
+              :name "Fats Navarro" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Fearless
+:Fearless rdf:type owl:NamedIndividual ,
+                   mo:Release ,
+                   schema1:MusicAlbum ;
+          :performedBy :Taylor_Swift ;
+          :publishedBy :Big_Machine_Records ;
+          :name "Fearless" ;
+          :releaseDate "2008-11-08"^^xsd:date ;
+          rdfs:label "Fearless"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Fontana_Records
+:Fontana_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Fontana Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Goldisc_Records
+:Goldisc_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Goldisc Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Grammy_Award_Taylor_Swift
+:Grammy_Award_Taylor_Swift rdf:type owl:NamedIndividual ,
+                                    :ChartPosition ;
+                           :chartName "Grammy Award" ;
+                           :position 1 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Grand_Hustle_Records
+:Grand_Hustle_Records rdf:type owl:NamedIndividual ,
+                               mo:Label ;
+                      :name "Grand Hustle Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Half_of_My_Heart
+:Half_of_My_Heart rdf:type owl:NamedIndividual ,
+                           mo:Release ,
+                           :Single ;
+                  :performedBy :Taylor_Swift ;
+                  :publishedBy :Columbia_Records ;
+                  :name "Half of My Heart" ;
+                  :releaseDate "2010-06-21"^^xsd:date ;
+                  rdfs:label "Half of My Heart"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Hank_Williams_Jr.
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Hank_Williams_Jr.> rdf:type owl:NamedIndividual ,
+                                                                                                                mo:MusicArtist ;
+                                                                                                       :collaboratedWith :Little_Richard ;
+                                                                                                       :dbpediaUri "http://dbpedia.org/resource/Hank_Williams_Jr."^^xsd:anyURI ;
+                                                                                                       :name "Hank Williams Jr." .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Hear_Music
+:Hear_Music rdf:type owl:NamedIndividual ,
+                     mo:Label ;
+            :name "Hear Music" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#I_Knew_You_Were_Trouble
+:I_Knew_You_Were_Trouble rdf:type owl:NamedIndividual ,
+                                  mo:Release ,
+                                  :Single ;
+                         :performedBy :Taylor_Swift ;
+                         :publishedBy :Republic_Records ;
+                         :name "I Knew You Were Trouble" ;
+                         :releaseDate "2012-11-01"^^xsd:date ;
+                         rdfs:label "I Knew You Were Trouble"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Island_Records
+:Island_Records rdf:type owl:NamedIndividual ,
+                         mo:Label ;
+                :name "Island Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Jack_Walrath
+:Jack_Walrath rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Charles_Mingus ;
+              :dbpediaUri "http://dbpedia.org/resource/Jack_Walrath"^^xsd:anyURI ;
+              :name "Jack Walrath" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Jaki_Byard
+:Jaki_Byard rdf:type owl:NamedIndividual ,
+                     mo:MusicArtist ;
+            :collaboratedWith :Charles_Mingus ;
+            :dbpediaUri "http://dbpedia.org/resource/Jaki_Byard"^^xsd:anyURI ;
+            :name "Jaki Byard" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Jimi_Hendrix
+:Jimi_Hendrix rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Little_Richard ;
+              :dbpediaUri "http://dbpedia.org/resource/Jimi_Hendrix"^^xsd:anyURI ;
+              :name "Jimi Hendrix" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Jimmy_Knepper
+:Jimmy_Knepper rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Charles_Mingus ;
+               :dbpediaUri "http://dbpedia.org/resource/Jimmy_Knepper"^^xsd:anyURI ;
+               :name "Jimmy Knepper" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Johnny_Depp
+:Johnny_Depp rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ,
+                      :SoloArtist ;
+             :hasChartPosition :Wikipedia_Presence_Johnny_Depp ;
+             :performed <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#18> ;
+             :genre "rock music" ;
+             :name "Johnny Depp" ;
+             rdfs:label "Johnny Depp"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Joni_Mitchell
+:Joni_Mitchell rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Charles_Mingus ;
+               :dbpediaUri "http://dbpedia.org/resource/Joni_Mitchell"^^xsd:anyURI ;
+               :name "Joni Mitchell" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#João_Gilberto
+:João_Gilberto rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Astrud_Gilberto ;
+               :dbpediaUri "http://dbpedia.org/resource/João_Gilberto"^^xsd:anyURI ;
+               :name "João Gilberto" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Justin_Bieber
+:Justin_Bieber rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ,
+                        :SoloArtist ;
+               :hasChartPosition :Wikipedia_Presence_Justin_Bieber ;
+               :performed :Believe ,
+                          :Boyfriend ,
+                          :Live_My_Life ,
+                          :Mistletoe ,
+                          :My_Worlds_-_The_Collection ;
+               :activeYearsStart "2007"^^xsd:gYear ;
+               :birthDate "1994-03-01"^^xsd:date ;
+               :genre "hip-hop" ;
+               :name "Justin Bieber" ;
+               rdfs:label "Justin Bieber"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#K-Tel_Records
+:K-Tel_Records rdf:type owl:NamedIndividual ,
+                        mo:Label ;
+               :name "K-Tel Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Larry_Williams
+:Larry_Williams rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ;
+                :collaboratedWith :Little_Richard ;
+                :dbpediaUri "http://dbpedia.org/resource/Larry_Williams"^^xsd:anyURI ;
+                :name "Larry Williams" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Legacy_Recordings
+:Legacy_Recordings rdf:type owl:NamedIndividual ,
+                            mo:Label ;
+                   :name "Legacy Recordings" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Leonard_Cohen
+:Leonard_Cohen rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ,
+                        :SoloArtist ;
+               :activeYearsStart "1954"^^xsd:gYear ;
+               :birthDate "1934-09-21"^^xsd:date ;
+               :genre "sophisti-pop" ;
+               :name "Leonard Cohen" ;
+               rdfs:label "Leonard Cohen"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Little_Richard
+:Little_Richard rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ,
+                         :SoloArtist ;
+                :collaboratedWith :Billy_Preston ,
+                                  :Don_Covay ,
+                                  <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Hank_Williams_Jr.> ,
+                                  :Jimi_Hendrix ,
+                                  :Larry_Williams ,
+                                  :The_Rolling_Stones ,
+                                  <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Billy_Wright_(musician)> ;
+                :hasRecordLabel :Atlantic_Records ,
+                                :Brunswick_Records ,
+                                :Disney_Records ,
+                                :End_Records ,
+                                :Goldisc_Records ,
+                                :K-Tel_Records ,
+                                :Little_Star_Records ,
+                                :London_Records ,
+                                :Mercury_Records ,
+                                :Modern_Records ,
+                                :Okeh_Records ,
+                                :Peacock_Records ,
+                                :RCA_Records ,
+                                :Reprise_Records ,
+                                :Ronnex_Records ,
+                                :Specialty_Records ,
+                                :Vee-Jay_Records ,
+                                :Warner_Bros._Records ;
+                :activeYearsStart "1947"^^xsd:gYear ;
+                :birthDate "1932-12-05"^^xsd:date ;
+                :genre "Gospel music" ,
+                       "Rhythm and blues" ,
+                       "Rock and roll" ,
+                       "Soul music" ,
+                       "rhythm and blues" ;
+                :name "Little Richard" ;
+                rdfs:label "Little Richard"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Little_Star_Records
+:Little_Star_Records rdf:type owl:NamedIndividual ,
+                              mo:Label ;
+                     :name "Little Star Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Live_My_Life
+:Live_My_Life rdf:type owl:NamedIndividual ,
+                       mo:Release ,
+                       :Single ;
+              :performedBy :Justin_Bieber ;
+              :publishedBy :Cherrytree_Records ;
+              :name "Live My Life" ;
+              :releaseDate "2012-02-28"^^xsd:date ;
+              rdfs:label "Live My Life"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#London_Records
+:London_Records rdf:type owl:NamedIndividual ,
+                         mo:Label ;
+                :name "London Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Lucky_Thompson
+:Lucky_Thompson rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ;
+                :collaboratedWith :Charlie_Parker ;
+                :dbpediaUri "http://dbpedia.org/resource/Lucky_Thompson"^^xsd:anyURI ;
+                :name "Lucky Thompson" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Ma_Rainey
+:Ma_Rainey rdf:type owl:NamedIndividual ,
+                    mo:MusicArtist ;
+           :collaboratedWith :Bessie_Smith ;
+           :dbpediaUri "http://dbpedia.org/resource/Ma_Rainey"^^xsd:anyURI ;
+           :name "Ma Rainey" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Malcolm_Burn
+:Malcolm_Burn rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Daniel_Lanois ;
+              :dbpediaUri "http://dbpedia.org/resource/Malcolm_Burn"^^xsd:anyURI ;
+              :name "Malcolm Burn" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#MapleMusic_Recordings
+:MapleMusic_Recordings rdf:type owl:NamedIndividual ,
+                                mo:Label ;
+                       :name "MapleMusic Recordings" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Max_Roach
+:Max_Roach rdf:type owl:NamedIndividual ,
+                    mo:MusicArtist ;
+           :collaboratedWith :Charles_Mingus ,
+                             :Charlie_Parker ;
+           :dbpediaUri "http://dbpedia.org/resource/Max_Roach"^^xsd:anyURI ;
+           :name "Max Roach" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Maxi_Priest
+:Maxi_Priest rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ;
+             :collaboratedWith :Roberta_Flack ;
+             :dbpediaUri "http://dbpedia.org/resource/Maxi_Priest"^^xsd:anyURI ;
+             :name "Maxi Priest" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Mercury_Records
+:Mercury_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Mercury Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Miles_Davis
+:Miles_Davis rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ,
+                      :SoloArtist ;
+             :collaboratedWith :Charles_Mingus ,
+                               :Charlie_Parker ,
+                               :Miles_Davis_Quintet ;
+             :hasRecordLabel :Capitol_Records ,
+                             :Columbia_Records ,
+                             :Fontana_Records ,
+                             :Prestige_Records ,
+                             :Warner_Bros._Records ;
+             :activeYearsStart "1944"^^xsd:gYear ;
+             :birthDate "1926-05-26"^^xsd:date ;
+             :genre "Jazz" ,
+                    "jazz" ;
+             :name "Miles Davis" ;
+             :playsInstrument "Cornet" ,
+                              "Electric organ" ,
+                              "Flugelhorn" ,
+                              "Piano" ,
+                              "Trumpet" ;
+             rdfs:label "Miles Davis"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Miles_Davis_Quintet
+:Miles_Davis_Quintet rdf:type owl:NamedIndividual ,
+                              mo:MusicArtist ;
+                     :collaboratedWith :Miles_Davis ;
+                     :dbpediaUri "http://dbpedia.org/resource/Miles_Davis_Quintet"^^xsd:anyURI ;
+                     :name "Miles Davis Quintet" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Mine
+:Mine rdf:type owl:NamedIndividual ,
+               mo:Release ,
+               :Single ;
+      :performedBy :Taylor_Swift ;
+      :publishedBy :Republic_Records ;
+      :name "Mine" ;
+      :releaseDate "2010-08-04"^^xsd:date ;
+      rdfs:label "Mine"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Mistletoe
+:Mistletoe rdf:type owl:NamedIndividual ,
+                    mo:Release ,
+                    :Single ;
+           :performedBy :Justin_Bieber ;
+           :publishedBy :RBMG_Records ;
+           :name "Mistletoe" ;
+           :releaseDate "2011-10-17"^^xsd:date ;
+           rdfs:label "Mistletoe"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Modern_Records
+:Modern_Records rdf:type owl:NamedIndividual ,
+                         mo:Label ;
+                :name "Modern Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Mozambique
+:Mozambique rdf:type owl:NamedIndividual ,
+                     mo:Release ,
+                     :Single ;
+            :performedBy :Bob_Dylan ;
+            :publishedBy :Columbia_Records ;
+            :name "Mozambique" ;
+            :releaseDate "1976-01-01"^^xsd:date ;
+            rdfs:label "Mozambique"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Mozart_The_Sonata_Project_-_Salzburg
+:Mozart_The_Sonata_Project_-_Salzburg rdf:type owl:NamedIndividual ,
+                                               mo:Release ,
+                                               schema1:MusicAlbum ;
+                                      :performedBy :Wolfgang_Amadeus_Mozart ;
+                                      :publishedBy :Warner_Classics ;
+                                      :name "Mozart: The Sonata Project - Salzburg" ;
+                                      :releaseDate "2024-04-05"^^xsd:date ;
+                                      rdfs:label "Mozart: The Sonata Project - Salzburg"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#My_Valentine
+:My_Valentine rdf:type owl:NamedIndividual ,
+                       mo:Release ,
+                       :Single ;
+              :performedBy :Paul_McCartney ;
+              :publishedBy :Hear_Music ;
+              :name "My Valentine" ;
+              :releaseDate "2012-02-06"^^xsd:date ;
+              rdfs:label "My Valentine"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#My_Worlds_-_The_Collection
+:My_Worlds_-_The_Collection rdf:type owl:NamedIndividual ,
+                                     mo:Release ,
+                                     schema1:MusicAlbum ;
+                            :performedBy :Justin_Bieber ;
+                            :publishedBy :Island_Records ;
+                            :name "My Worlds - The Collection" ;
+                            :releaseDate "2010-11-19"^^xsd:date ;
+                            rdfs:label "My Worlds - The Collection"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Neil_Young
+:Neil_Young rdf:type owl:NamedIndividual ,
+                     mo:MusicArtist ;
+            :collaboratedWith :Bob_Dylan ,
+                              :Daniel_Lanois ;
+            :dbpediaUri "http://dbpedia.org/resource/Neil_Young"^^xsd:anyURI ;
+            :name "Neil Young" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#New
+:New rdf:type owl:NamedIndividual ,
+              mo:Release ,
+              schema1:MusicAlbum ;
+     :performedBy :Paul_McCartney ;
+     :publishedBy :Hear_Music ;
+     :name "New" ;
+     :releaseDate "2013-10-14"^^xsd:date ;
+     rdfs:label "New"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Okeh_Records
+:Okeh_Records rdf:type owl:NamedIndividual ,
+                       mo:Label ;
+              :name "Okeh Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Pablo_Records
+:Pablo_Records rdf:type owl:NamedIndividual ,
+                        mo:Label ;
+               :name "Pablo Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Paul_Epworth
+:Paul_Epworth rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ,
+                       :SoloArtist ;
+              :hasRecordLabel :Columbia_Records ;
+              :activeYearsStart "2000"^^xsd:gYear ;
+              :birthDate "1974-07-25"^^xsd:date ;
+              :genre "Dance music" ,
+                     "Hip hop music" ,
+                     "Indie rock" ,
+                     "Pop music" ,
+                     "Punk rock" ,
+                     "indie rock" ;
+              :name "Paul Epworth" ;
+              rdfs:label "Paul Epworth"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Paul_McCartney
+:Paul_McCartney rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ,
+                         :SoloArtist ;
+                :hasChartPosition :Wikipedia_Presence_Paul_McCartney ;
+                :performed :Ever_Present_Past ,
+                           :My_Valentine ,
+                           :New ,
+                           :This_One ,
+                           :Twin_Freaks ;
+                :activeYearsStart "1957"^^xsd:gYear ;
+                :birthDate "1942-06-18"^^xsd:date ;
+                :genre "psychedelic rock" ,
+                       "rock and roll" ;
+                :name "Paul McCartney" ;
+                rdfs:label "Paul McCartney"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Peabo_Bryson
+:Peabo_Bryson rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Roberta_Flack ;
+              :dbpediaUri "http://dbpedia.org/resource/Peabo_Bryson"^^xsd:anyURI ;
+              :name "Peabo Bryson" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Peacock_Records
+:Peacock_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Peacock Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Pepper_Adams
+:Pepper_Adams rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Charles_Mingus ;
+              :dbpediaUri "http://dbpedia.org/resource/Pepper_Adams"^^xsd:anyURI ;
+              :name "Pepper Adams" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Perception_Records
+:Perception_Records rdf:type owl:NamedIndividual ,
+                             mo:Label ;
+                    :name "Perception Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Peter_Gabriel
+:Peter_Gabriel rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Daniel_Lanois ;
+               :dbpediaUri "http://dbpedia.org/resource/Peter_Gabriel"^^xsd:anyURI ;
+               :name "Peter Gabriel" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Picture_to_Burn
+:Picture_to_Burn rdf:type owl:NamedIndividual ,
+                          mo:Release ,
+                          :Single ;
+                 :performedBy :Taylor_Swift ;
+                 :publishedBy :Universal_Republic_Records ;
+                 :name "Picture to Burn" ;
+                 :releaseDate "2008-02-03"^^xsd:date ;
+                 rdfs:label "Picture to Burn"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Prestige_Records
+:Prestige_Records rdf:type owl:NamedIndividual ,
+                           mo:Label ;
+                  :name "Prestige Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#RAS_Records
+:RAS_Records rdf:type owl:NamedIndividual ,
+                      mo:Label ;
+             :name "RAS Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#RBMG_Records
+:RBMG_Records rdf:type owl:NamedIndividual ,
+                       mo:Label ;
+              :name "RBMG Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#RCA_Records
+:RCA_Records rdf:type owl:NamedIndividual ,
+                      mo:Label ;
+             :name "RCA Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#RCA_Victor_Records
+:RCA_Victor_Records rdf:type owl:NamedIndividual ,
+                             mo:Label ;
+                    :name "RCA Victor Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Red
+:Red rdf:type owl:NamedIndividual ,
+              mo:Release ,
+              :Single ;
+     :performedBy :Taylor_Swift ;
+     :publishedBy :Big_Machine_Records ;
+     :name "Red" ;
+     :releaseDate "2012-10-02"^^xsd:date ;
+     rdfs:label "Red"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Red_Rodney
+:Red_Rodney rdf:type owl:NamedIndividual ,
+                     mo:MusicArtist ;
+            :collaboratedWith :Charlie_Parker ;
+            :dbpediaUri "http://dbpedia.org/resource/Red_Rodney"^^xsd:anyURI ;
+            :name "Red Rodney" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Reprise_Records
+:Reprise_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Reprise Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Republic_Records
+:Republic_Records rdf:type owl:NamedIndividual ,
+                           mo:Label ;
+                  :name "Republic Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Rhino
+:Rhino rdf:type owl:NamedIndividual ,
+                mo:Label ;
+       :name "Rhino" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Roberta_Flack
+:Roberta_Flack rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ,
+                        :SoloArtist ;
+               :collaboratedWith :Donny_Hathaway ,
+                                 :Maxi_Priest ,
+                                 :Peabo_Bryson ;
+               :hasRecordLabel :Angel_Records ,
+                               :Atlantic_Records ,
+                               :Capitol_Records ,
+                               :RAS_Records ,
+                               <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#429_Records> ,
+                               <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Sony/ATV_Music_Publishing> ;
+               :activeYearsStart "1968"^^xsd:gYear ;
+               :birthDate "1937-02-10"^^xsd:date ;
+               :genre "Folk music" ,
+                      "Jazz" ,
+                      "Rhythm and blues" ,
+                      "Soul music" ,
+                      "traditional folk music" ;
+               :name "Roberta Flack" ;
+               rdfs:label "Roberta Flack"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Rocco_DeLuca
+:Rocco_DeLuca rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ;
+              :collaboratedWith :Daniel_Lanois ;
+              :dbpediaUri "http://dbpedia.org/resource/Rocco_DeLuca"^^xsd:anyURI ;
+              :name "Rocco DeLuca" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Romain_Rolland
+:Romain_Rolland rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ,
+                         :SoloArtist ;
+                :hasChartPosition :Wikipedia_Presence_Romain_Rolland ;
+                :activeYearsStart "1902"^^xsd:gYear ;
+                :birthDate "1866-01-29"^^xsd:date ;
+                :name "Romain Rolland" ;
+                rdfs:label "Romain Rolland"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Ronnex_Records
+:Ronnex_Records rdf:type owl:NamedIndividual ,
+                         mo:Label ;
+                :name "Ronnex Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Roy_Haynes
+:Roy_Haynes rdf:type owl:NamedIndividual ,
+                     mo:MusicArtist ;
+            :collaboratedWith :Charlie_Parker ;
+            :dbpediaUri "http://dbpedia.org/resource/Roy_Haynes"^^xsd:anyURI ;
+            :name "Roy Haynes" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Saved
+:Saved rdf:type owl:NamedIndividual ,
+                mo:Release ,
+                :Single ;
+       :performedBy :Bob_Dylan ;
+       :name "Saved" ;
+       rdfs:label "Saved"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Savoy_Records
+:Savoy_Records rdf:type owl:NamedIndividual ,
+                        mo:Label ;
+               :name "Savoy Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Scott_Weiland
+:Scott_Weiland rdf:type owl:NamedIndividual ,
+                        mo:MusicArtist ;
+               :collaboratedWith :Daniel_Lanois ;
+               :dbpediaUri "http://dbpedia.org/resource/Scott_Weiland"^^xsd:anyURI ;
+               :name "Scott Weiland" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Shouldve_Said_No
+:Shouldve_Said_No rdf:type owl:NamedIndividual ,
+                           mo:Release ,
+                           :Single ;
+                  :performedBy :Taylor_Swift ;
+                  :publishedBy :Big_Machine_Records ;
+                  :name "Should've Said No" ;
+                  :releaseDate "2008-05-18"^^xsd:date ;
+                  rdfs:label "Should've Said No"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Sonny_Stitt
+:Sonny_Stitt rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ;
+             :collaboratedWith :Charlie_Parker ;
+             :dbpediaUri "http://dbpedia.org/resource/Sonny_Stitt"^^xsd:anyURI ;
+             :name "Sonny Stitt" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Speak_Now
+:Speak_Now rdf:type owl:NamedIndividual ,
+                    mo:Release ,
+                    schema1:MusicAlbum ;
+           :performedBy :Taylor_Swift ;
+           :publishedBy :Big_Machine_Records ;
+           :name "Speak Now" ;
+           :releaseDate "2010-10-25"^^xsd:date ;
+           rdfs:label "Speak Now"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Specialty_Records
+:Specialty_Records rdf:type owl:NamedIndividual ,
+                            mo:Label ;
+                   :name "Specialty Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Stan_Getz
+:Stan_Getz rdf:type owl:NamedIndividual ,
+                    mo:MusicArtist ;
+           :collaboratedWith :Astrud_Gilberto ;
+           :dbpediaUri "http://dbpedia.org/resource/Stan_Getz"^^xsd:anyURI ;
+           :name "Stan Getz" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Taylor_Swift
+:Taylor_Swift rdf:type owl:NamedIndividual ,
+                       mo:MusicArtist ,
+                       :SoloArtist ;
+              :hasChartPosition :Grammy_Award_Taylor_Swift ;
+              :performed :Beautiful_Eyes ,
+                         :Begin_Again ,
+                         :Both_of_Us ,
+                         :Crazier ,
+                         :Eyes_Open ,
+                         :Fearless ,
+                         :Half_of_My_Heart ,
+                         :I_Knew_You_Were_Trouble ,
+                         :Mine ,
+                         :Picture_to_Burn ,
+                         :Red ,
+                         :Shouldve_Said_No ,
+                         :Speak_Now ,
+                         :Teardrops_on_My_Guitar ,
+                         :The_Taylor_Swift_Holiday_Collection ,
+                         :Tim_McGraw ,
+                         :Today_Was_a_Fairytale ,
+                         <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#22> ;
+              :activeYearsStart "2004"^^xsd:gYear ;
+              :birthDate "1989-12-13"^^xsd:date ;
+              :genre "country pop" ;
+              :name "Taylor Swift" ;
+              rdfs:label "Taylor Swift"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Teardrops_on_My_Guitar
+:Teardrops_on_My_Guitar rdf:type owl:NamedIndividual ,
+                                 mo:Release ,
+                                 :Single ;
+                        :performedBy :Taylor_Swift ;
+                        :publishedBy :Big_Machine_Records ;
+                        :name "Teardrops on My Guitar" ;
+                        :releaseDate "2007-02-19"^^xsd:date ;
+                        rdfs:label "Teardrops on My Guitar"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Buggles
+:The_Buggles rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ;
+             :collaboratedWith :Trevor_Horn ;
+             :dbpediaUri "http://dbpedia.org/resource/The_Buggles"^^xsd:anyURI ;
+             :name "The Buggles" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Da_Ponte_Operas
+:The_Da_Ponte_Operas rdf:type owl:NamedIndividual ,
+                              mo:Release ,
+                              schema1:MusicAlbum ;
+                     :performedBy :Wolfgang_Amadeus_Mozart ;
+                     :publishedBy :EMI_Classics ;
+                     :name "The Da Ponte Operas" ;
+                     :releaseDate "2002-01-01"^^xsd:date ;
+                     rdfs:label "The Da Ponte Operas"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Essential_Bob_Dylan
+:The_Essential_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                  mo:Release ,
+                                  schema1:MusicAlbum ;
+                         :performedBy :Bob_Dylan ;
+                         :name "The Essential Bob Dylan" ;
+                         :releaseDate "2010-01-01"^^xsd:date ;
+                         rdfs:label "The Essential Bob Dylan"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Original_Mono_Recordings
+:The_Original_Mono_Recordings rdf:type owl:NamedIndividual ,
+                                       mo:Release ,
+                                       schema1:MusicAlbum ;
+                              :performedBy :Bob_Dylan ;
+                              :publishedBy :Legacy_Recordings ;
+                              :name "The Original Mono Recordings" ;
+                              :releaseDate "2010-01-01"^^xsd:date ;
+                              rdfs:label "The Original Mono Recordings"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Parachute_Club
+:The_Parachute_Club rdf:type owl:NamedIndividual ,
+                             mo:MusicArtist ;
+                    :collaboratedWith :Daniel_Lanois ;
+                    :dbpediaUri "http://dbpedia.org/resource/The_Parachute_Club"^^xsd:anyURI ;
+                    :name "The Parachute Club" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Rolling_Stones
+:The_Rolling_Stones rdf:type owl:NamedIndividual ,
+                             mo:MusicArtist ;
+                    :collaboratedWith :Little_Richard ;
+                    :dbpediaUri "http://dbpedia.org/resource/The_Rolling_Stones"^^xsd:anyURI ;
+                    :name "The Rolling Stones" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Taylor_Swift_Holiday_Collection
+:The_Taylor_Swift_Holiday_Collection rdf:type owl:NamedIndividual ,
+                                              mo:Release ,
+                                              :EP ;
+                                     :performedBy :Taylor_Swift ;
+                                     :publishedBy :Big_Machine_Records ;
+                                     :name "The Taylor Swift Holiday Collection" ;
+                                     :releaseDate "2007-01-01"^^xsd:date ;
+                                     rdfs:label "The Taylor Swift Holiday Collection"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#The_Trevor_Horn_Band
+:The_Trevor_Horn_Band rdf:type owl:NamedIndividual ,
+                               mo:MusicArtist ;
+                      :collaboratedWith :Trevor_Horn ;
+                      :dbpediaUri "http://dbpedia.org/resource/The_Trevor_Horn_Band"^^xsd:anyURI ;
+                      :name "The Trevor Horn Band" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Thelonious_Monk
+:Thelonious_Monk rdf:type owl:NamedIndividual ,
+                          mo:MusicArtist ;
+                 :collaboratedWith :Charlie_Parker ;
+                 :dbpediaUri "http://dbpedia.org/resource/Thelonious_Monk"^^xsd:anyURI ;
+                 :name "Thelonious Monk" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#This_One
+:This_One rdf:type owl:NamedIndividual ,
+                   mo:Release ,
+                   :Single ;
+          :performedBy :Paul_McCartney ;
+          :publishedBy :EMI ;
+          :name "This One" ;
+          :releaseDate "1989-07-17"^^xsd:date ;
+          rdfs:label "This One"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Tim_McGraw
+:Tim_McGraw rdf:type owl:NamedIndividual ,
+                     mo:Release ,
+                     :Single ;
+            :performedBy :Taylor_Swift ;
+            :publishedBy :Big_Machine_Records ;
+            :name "Tim McGraw" ;
+            :releaseDate "2006-06-19"^^xsd:date ;
+            rdfs:label "Tim McGraw"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Tina_Turner
+:Tina_Turner rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ,
+                      :SoloArtist ;
+             :activeYearsStart "1957"^^xsd:gYear ;
+             :birthDate "1939-11-26"^^xsd:date ;
+             :genre "rhythm and blues" ;
+             :name "Tina Turner" ;
+             rdfs:label "Tina Turner"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Today_Was_a_Fairytale
+:Today_Was_a_Fairytale rdf:type owl:NamedIndividual ,
+                                mo:Release ,
+                                :Single ;
+                       :performedBy :Taylor_Swift ;
+                       :publishedBy :Big_Machine_Records ;
+                       :name "Today Was a Fairytale" ;
+                       :releaseDate "2010-01-19"^^xsd:date ;
+                       rdfs:label "Today Was a Fairytale"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Trevor_Horn
+:Trevor_Horn rdf:type owl:NamedIndividual ,
+                      mo:MusicArtist ,
+                      :SoloArtist ;
+             :collaboratedWith :Art_of_Noise ,
+                               :The_Buggles ,
+                               :The_Trevor_Horn_Band ,
+                               <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Seal_(musician)> ,
+                               <http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Yes_(band)> ;
+             :hasRecordLabel :ZTT_Records ;
+             :activeYearsStart "1966"^^xsd:gYear ;
+             :birthDate "1949-07-15"^^xsd:date ;
+             :genre "Disco" ,
+                    "Electronic music" ,
+                    "New wave music" ,
+                    "Progressive rock" ,
+                    "Rock and roll" ,
+                    "Soul music" ,
+                    "Synth-pop" ,
+                    "progressive rock" ;
+             :name "Trevor Horn" ;
+             rdfs:label "Trevor Horn"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Trixie_Whitley
+:Trixie_Whitley rdf:type owl:NamedIndividual ,
+                         mo:MusicArtist ;
+                :collaboratedWith :Daniel_Lanois ;
+                :dbpediaUri "http://dbpedia.org/resource/Trixie_Whitley"^^xsd:anyURI ;
+                :name "Trixie Whitley" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Twin_Freaks
+:Twin_Freaks rdf:type owl:NamedIndividual ,
+                      mo:Release ,
+                      schema1:MusicAlbum ;
+             :performedBy :Paul_McCartney ;
+             :publishedBy :EMI ;
+             :name "Twin Freaks" ;
+             :releaseDate "2005-01-01"^^xsd:date ;
+             rdfs:label "Twin Freaks"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#U2
+:U2 rdf:type owl:NamedIndividual ,
+             mo:MusicArtist ;
+    :collaboratedWith :Daniel_Lanois ;
+    :dbpediaUri "http://dbpedia.org/resource/U2"^^xsd:anyURI ;
+    :name "U2" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#United_Artists_Records
+:United_Artists_Records rdf:type owl:NamedIndividual ,
+                                 mo:Label ;
+                        :name "United Artists Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Universal_Republic_Records
+:Universal_Republic_Records rdf:type owl:NamedIndividual ,
+                                     mo:Label ;
+                            :name "Universal Republic Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Vee-Jay_Records
+:Vee-Jay_Records rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Vee-Jay Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Venetian_Snares
+:Venetian_Snares rdf:type owl:NamedIndividual ,
+                          mo:MusicArtist ;
+                 :collaboratedWith :Daniel_Lanois ;
+                 :dbpediaUri "http://dbpedia.org/resource/Venetian_Snares"^^xsd:anyURI ;
+                 :name "Venetian Snares" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Verve_Records
+:Verve_Records rdf:type owl:NamedIndividual ,
+                        mo:Label ;
+               :name "Verve Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Vogue_Records
+:Vogue_Records rdf:type owl:NamedIndividual ,
+                        mo:Label ;
+               :name "Vogue Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Walt_Disney_Records
+:Walt_Disney_Records rdf:type owl:NamedIndividual ,
+                              mo:Label ;
+                     :name "Walt Disney Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Warner_Bros._Records
+:Warner_Bros._Records rdf:type owl:NamedIndividual ,
+                               mo:Label ;
+                      :name "Warner Bros. Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Warner_Classics
+:Warner_Classics rdf:type owl:NamedIndividual ,
+                          mo:Label ;
+                 :name "Warner Classics" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Wikipedia_Presence_Bob_Dylan
+:Wikipedia_Presence_Bob_Dylan rdf:type owl:NamedIndividual ,
+                                       :ChartPosition ;
+                              :chartName "Wikipedia Language Count" ;
+                              :position 182 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Wikipedia_Presence_Johnny_Depp
+:Wikipedia_Presence_Johnny_Depp rdf:type owl:NamedIndividual ,
+                                         :ChartPosition ;
+                                :chartName "Wikipedia Language Count" ;
+                                :position 143 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Wikipedia_Presence_Justin_Bieber
+:Wikipedia_Presence_Justin_Bieber rdf:type owl:NamedIndividual ,
+                                           :ChartPosition ;
+                                  :chartName "Wikipedia Language Count" ;
+                                  :position 176 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Wikipedia_Presence_Paul_McCartney
+:Wikipedia_Presence_Paul_McCartney rdf:type owl:NamedIndividual ,
+                                            :ChartPosition ;
+                                   :chartName "Wikipedia Language Count" ;
+                                   :position 145 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Wikipedia_Presence_Romain_Rolland
+:Wikipedia_Presence_Romain_Rolland rdf:type owl:NamedIndividual ,
+                                            :ChartPosition ;
+                                   :chartName "Wikipedia Language Count" ;
+                                   :position 136 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Wikipedia_Presence_Wolfgang_Amadeus_Mozart
+:Wikipedia_Presence_Wolfgang_Amadeus_Mozart rdf:type owl:NamedIndividual ,
+                                                     :ChartPosition ;
+                                            :chartName "Wikipedia Language Count" ;
+                                            :position 264 .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Wolfgang_Amadeus_Mozart
+:Wolfgang_Amadeus_Mozart rdf:type owl:NamedIndividual ,
+                                  mo:MusicArtist ,
+                                  :SoloArtist ;
+                         :hasChartPosition :Award_Order_of_the_Golden_Spur_Wolfgang_Amadeus_Mozart ,
+                                           :Wikipedia_Presence_Wolfgang_Amadeus_Mozart ;
+                         :performed :Mozart_The_Sonata_Project_-_Salzburg ,
+                                    :The_Da_Ponte_Operas ;
+                         :genre "opera" ;
+                         :name "Wolfgang Amadeus Mozart" ;
+                         rdfs:label "Wolfgang Amadeus Mozart"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#ZTT_Records
+:ZTT_Records rdf:type owl:NamedIndividual ,
+                      mo:Label ;
+             :name "ZTT Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#18
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#18> rdf:type owl:NamedIndividual ,
+                                                                                                 mo:Release ,
+                                                                                                 schema1:MusicAlbum ;
+                                                                                        :performedBy :Johnny_Depp ;
+                                                                                        :publishedBy :Atco_Records ,
+                                                                                                     :Rhino ;
+                                                                                        :name "18" ;
+                                                                                        :releaseDate "2022-07-15"^^xsd:date ;
+                                                                                        rdfs:label "18"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#22
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#22> rdf:type owl:NamedIndividual ,
+                                                                                                 mo:Release ,
+                                                                                                 :Single ;
+                                                                                        :performedBy :Taylor_Swift ;
+                                                                                        :publishedBy :Republic_Records ;
+                                                                                        :name "22" ;
+                                                                                        :releaseDate "2013-03-13"^^xsd:date ;
+                                                                                        rdfs:label "22"@en .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#429_Records
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#429_Records> rdf:type owl:NamedIndividual ,
+                                                                                                          mo:Label ;
+                                                                                                 :name "429 Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Billy_Wright_(musician)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Billy_Wright_(musician)> rdf:type owl:NamedIndividual ,
+                                                                                                                      mo:MusicArtist ;
+                                                                                                             :collaboratedWith :Little_Richard ;
+                                                                                                             :dbpediaUri "http://dbpedia.org/resource/Billy_Wright_(musician)"^^xsd:anyURI ;
+                                                                                                             :name "Billy Wright (musician)" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Black_Dub_(album)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Black_Dub_(album)> rdf:type owl:NamedIndividual ,
+                                                                                                                mo:MusicArtist ;
+                                                                                                       :collaboratedWith :Daniel_Lanois ;
+                                                                                                       :dbpediaUri "http://dbpedia.org/resource/Black_Dub_(album)"^^xsd:anyURI ;
+                                                                                                       :name "Black Dub (album)" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Dial_Records_(1946)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Dial_Records_(1946)> rdf:type owl:NamedIndividual ,
+                                                                                                                  mo:Label ;
+                                                                                                         :name "Dial Records (1946)" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Esquire_Records_(UK)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Esquire_Records_(UK)> rdf:type owl:NamedIndividual ,
+                                                                                                                   mo:Label ;
+                                                                                                          :name "Esquire Records (UK)" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Impulse!_Records
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Impulse!_Records> rdf:type owl:NamedIndividual ,
+                                                                                                               mo:Label ;
+                                                                                                      :name "Impulse! Records" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Raffi_(musician)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Raffi_(musician)> rdf:type owl:NamedIndividual ,
+                                                                                                               mo:MusicArtist ;
+                                                                                                      :collaboratedWith :Daniel_Lanois ;
+                                                                                                      :dbpediaUri "http://dbpedia.org/resource/Raffi_(musician)"^^xsd:anyURI ;
+                                                                                                      :name "Raffi (musician)" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Seal_(musician)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Seal_(musician)> rdf:type owl:NamedIndividual ,
+                                                                                                              mo:MusicArtist ;
+                                                                                                     :collaboratedWith :Trevor_Horn ;
+                                                                                                     :dbpediaUri "http://dbpedia.org/resource/Seal_(musician)"^^xsd:anyURI ;
+                                                                                                     :name "Seal (musician)" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Sony/ATV_Music_Publishing
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Sony/ATV_Music_Publishing> rdf:type owl:NamedIndividual ,
+                                                                                                                        mo:Label ;
+                                                                                                               :name "Sony/ATV Music Publishing" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Spoons_(band)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Spoons_(band)> rdf:type owl:NamedIndividual ,
+                                                                                                            mo:MusicArtist ;
+                                                                                                   :collaboratedWith :Daniel_Lanois ;
+                                                                                                   :dbpediaUri "http://dbpedia.org/resource/Spoons_(band)"^^xsd:anyURI ;
+                                                                                                   :name "Spoons (band)" .
+
+
+###  http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Yes_(band)
+<http://www.semanticweb.org/adinsegall/ontologies/2025/4/music-artist-relationships#Yes_(band)> rdf:type owl:NamedIndividual ,
+                                                                                                         mo:MusicArtist ;
+                                                                                                :collaboratedWith :Trevor_Horn ;
+                                                                                                :dbpediaUri "http://dbpedia.org/resource/Yes_(band)"^^xsd:anyURI ;
+                                                                                                :name "Yes (band)" .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+:x rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:y1 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:y2 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:c rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:r1 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:r2 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:r3 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "2+ Collabs" ;
+   rdfs:label "CollaborativeArtistRule" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mo:MusicArtist ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :collaboratedWith ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :y1
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :collaboratedWith ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :y2
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :CollaborativeArtist ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "artists with any award" ;
+   rdfs:label "AwardWinnerRule" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mo:MusicArtist ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasChartPosition ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :c
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :AwardWinner ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "ProlificArtistRule" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mo:MusicArtist ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :performed ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :r1
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :performed ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :r2
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :performed ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :r3
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :ProlificArtist ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

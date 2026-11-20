@@ -1,0 +1,412 @@
+[
+  {
+    "local_uri": "Adele",
+    "name": "Adele",
+    "dbpedia_uri": "http://dbpedia.org/resource/Adele",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Band",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Arturo_Toscanini",
+    "name": "Arturo Toscanini",
+    "dbpedia_uri": "http://dbpedia.org/resource/Arturo_Toscanini",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Astrud_Gilberto",
+    "name": "Astrud Gilberto",
+    "dbpedia_uri": "http://dbpedia.org/resource/Astrud_Gilberto",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Bessie_Smith",
+    "name": "Bessie Smith",
+    "dbpedia_uri": "http://dbpedia.org/resource/Bessie_Smith",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Billie_Holiday",
+    "name": "Billie Holiday",
+    "dbpedia_uri": "http://dbpedia.org/resource/Billie_Holiday",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Bob_Dylan",
+    "name": "Bob Dylan",
+    "dbpedia_uri": "http://dbpedia.org/resource/Bob_Dylan",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": false,
+    "current_releases": 5,
+    "current_genres": 3
+  },
+  {
+    "local_uri": "Charles_Mingus",
+    "name": "Charles Mingus",
+    "dbpedia_uri": "http://dbpedia.org/resource/Charles_Mingus",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Charlie_Parker",
+    "name": "Charlie Parker",
+    "dbpedia_uri": "http://dbpedia.org/resource/Charlie_Parker",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Daniel_Lanois",
+    "name": "Daniel Lanois",
+    "dbpedia_uri": "http://dbpedia.org/resource/Daniel_Lanois",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "David_Bowie",
+    "name": "David Bowie",
+    "dbpedia_uri": "http://dbpedia.org/resource/David_Bowie",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Dizzy_Gillespie",
+    "name": "Dizzy Gillespie",
+    "dbpedia_uri": "http://dbpedia.org/resource/Dizzy_Gillespie",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/Band",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Duke_Ellington",
+    "name": "Duke Ellington",
+    "dbpedia_uri": "http://dbpedia.org/resource/Duke_Ellington",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/Band",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Johnny_Depp",
+    "name": "Johnny Depp",
+    "dbpedia_uri": "http://dbpedia.org/resource/Johnny_Depp",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species"
+    ],
+    "needs_enrichment": false,
+    "current_releases": 1,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Justin_Bieber",
+    "name": "Justin Bieber",
+    "dbpedia_uri": "http://dbpedia.org/resource/Justin_Bieber",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Band",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": false,
+    "current_releases": 5,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Leonard_Cohen",
+    "name": "Leonard Cohen",
+    "dbpedia_uri": "http://dbpedia.org/resource/Leonard_Cohen",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Little_Richard",
+    "name": "Little Richard",
+    "dbpedia_uri": "http://dbpedia.org/resource/Little_Richard",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Miles_Davis",
+    "name": "Miles Davis",
+    "dbpedia_uri": "http://dbpedia.org/resource/Miles_Davis",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/Band",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Paul_Epworth",
+    "name": "Paul Epworth",
+    "dbpedia_uri": "http://dbpedia.org/resource/Paul_Epworth",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Paul_McCartney",
+    "name": "Paul McCartney",
+    "dbpedia_uri": "http://dbpedia.org/resource/Paul_McCartney",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": false,
+    "current_releases": 5,
+    "current_genres": 2
+  },
+  {
+    "local_uri": "Roberta_Flack",
+    "name": "Roberta Flack",
+    "dbpedia_uri": "http://dbpedia.org/resource/Roberta_Flack",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Romain_Rolland",
+    "name": "Romain Rolland",
+    "dbpedia_uri": "http://dbpedia.org/resource/Romain_Rolland",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Writer"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 0
+  },
+  {
+    "local_uri": "Taylor_Swift",
+    "name": "Taylor Swift",
+    "dbpedia_uri": "http://dbpedia.org/resource/Taylor_Swift",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": false,
+    "current_releases": 18,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Tina_Turner",
+    "name": "Tina Turner",
+    "dbpedia_uri": "http://dbpedia.org/resource/Tina_Turner",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Band",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Trevor_Horn",
+    "name": "Trevor Horn",
+    "dbpedia_uri": "http://dbpedia.org/resource/Trevor_Horn",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/Animal",
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Species",
+      "http://dbpedia.org/ontology/Artist",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": true,
+    "current_releases": 0,
+    "current_genres": 1
+  },
+  {
+    "local_uri": "Wolfgang_Amadeus_Mozart",
+    "name": "Wolfgang Amadeus Mozart",
+    "dbpedia_uri": "http://dbpedia.org/resource/Wolfgang_Amadeus_Mozart",
+    "exists": true,
+    "types": [
+      "http://dbpedia.org/ontology/Person",
+      "http://dbpedia.org/ontology/MusicalArtist"
+    ],
+    "needs_enrichment": false,
+    "current_releases": 2,
+    "current_genres": 1
+  }
+]
