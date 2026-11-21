@@ -1,8 +1,8 @@
 # music-artist-ontology
 
-An OWL ontology of music artists, releases, and professional relationships, populated live from Wikidata and enriched from DBpedia — with SPARQL fusion queries that only work because both sources are integrated, and SWRL rules that classify artists through a reasoner. Built for the Data Semantics module of my MSc at Queen Mary University of London.
+An OWL ontology of music artists, releases, and professional relationships, populated live from Wikidata and enriched from DBpedia. SPARQL fusion queries pull answers that need both sources at once, and SWRL rules classify artists through a reasoner. Built for the Data Semantics module of my MSc at Queen Mary University of London.
 
-The populated graph: 25 artists (15 solo, 10 bands), 36 releases, 60 record labels, 87 collaboration relationships — 1,096 triples.
+The populated graph: 25 artists (15 solo, 10 bands), 36 releases, 60 record labels, and 87 collaboration relationships, 1,096 triples in total.
 
 ## Pipeline
 
@@ -14,7 +14,7 @@ The populated graph: 25 artists (15 solo, 10 bands), 36 releases, 60 record labe
 | 4. Fusion queries | `fusion_queries.py` | 5 queries that require both sources |
 | 5. Add SWRL rules | `add_swrl_rules.py` | `music-artist-relationships-advanced.ttl` |
 
-`music-artist-relationships.ttl` is the finished ontology with SWRL rules already included — open it directly in Protégé and run Pellet to see the inferred classes light up (ProlificArtist, AwardWinner, CollaborativeArtist).
+`music-artist-relationships.ttl` is the finished ontology with the SWRL rules already included. Open it directly in Protégé and run Pellet to see the inferred classes light up (ProlificArtist, AwardWinner, CollaborativeArtist).
 
 ## Run it
 
@@ -30,10 +30,10 @@ Artist selection is seeded by RIAA certification level (Gold / Platinum / Diamon
 
 ## What the fusion shows
 
-The two sources complement rather than duplicate: Wikidata is strong on commercial metadata (certifications, chart positions, labels), DBpedia on historical/biographical context (collaborations, genres, instruments). Only 4 of the 25 artists have rich data in both — which is exactly what makes the fusion queries informative.
+The two sources complement rather than duplicate: Wikidata is strong on commercial metadata (certifications, chart positions, labels), DBpedia on historical and biographical context (collaborations, genres, instruments). Only 4 of the 25 artists have rich data in both, which is exactly what makes the fusion queries informative.
 
 Known limitation, documented in the report: two of the five SWRL rules (VeteranArtist, MultiGenreArtist) fail to infer under Pellet due to xsd:gYear datatype handling and differentFrom timeout issues.
 
 ## Report
 
-`report.pdf` covers the ontology design, the population/enrichment pipeline, the fusion analysis, and the reasoning results with Protégé screenshots.
+`report.pdf` covers the ontology design, the population and enrichment pipeline, the fusion analysis, and the reasoning results with Protégé screenshots.
